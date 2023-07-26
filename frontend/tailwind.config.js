@@ -2,16 +2,30 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    colors: {
-      brightblue: "hsl(220, 98%, 61%)",
-      gradient1: "hsl(192, 100%, 67%)",
-      graident2: "hsl(280, 87%, 65%)",
-    },
     extend: {
-      fontFamily: ["Josefin Sans", "sans-serif"],
-    },
-    fontSize: {
-      standard: "18px",
+      colors: {
+        brightblue: "hsl(220, 98%, 61%)",
+        gradient1: "hsl(192, 100%, 67%)",
+        graident2: "hsl(280, 87%, 65%)",
+        vlgray: "hsl(0,0%, 98%)",
+        vlgblue: "hsl(236, 33%, 92%)",
+      },
+      fontFamily: {
+        primary: ["Josefin Sans", "sans-serif"],
+      },
+      fontSize: {
+        standard: "18px",
+      },
+      screens: {
+        mobile: "375px",
+        desktop: "1440px",
+      },
+      backgroundImage: {
+        desktopDark: "url('./images/bg-desktop-dark.jpg')",
+        desktopLight: "url('./images/bg-desktop-light.jpg')",
+        mobileDark: "url('./images/bg-mobile-dark.jpg')",
+        mobileLight: "url('./images/bg-mobile-light.jpg')",
+      },
     },
   },
   plugins: [],
