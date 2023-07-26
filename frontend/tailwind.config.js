@@ -9,6 +9,9 @@ module.exports = {
         graident2: "hsl(280, 87%, 65%)",
         vlgray: "hsl(0,0%, 98%)",
         vlgblue: "hsl(236, 33%, 92%)",
+        lgblue: "hsl(233, 11%, 84%)",
+        dgblue: "hsl(236, 9%, 61%)",
+        vdgblue: "hsl(235, 19%, 35%)",
       },
       fontFamily: {
         primary: ["Josefin Sans", "sans-serif"],
