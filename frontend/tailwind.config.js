@@ -6,7 +6,7 @@ module.exports = {
       colors: {
         brightblue: "hsl(220, 98%, 61%)",
         gradient1: "hsl(192, 100%, 67%)",
-        graident2: "hsl(280, 87%, 65%)",
+        gradient2: "hsl(280, 87%, 65%)",
         vlgray: "hsl(0,0%, 98%)",
         vlgblue: "hsl(236, 33%, 92%)",
         lgblue: "hsl(233, 11%, 84%)",
@@ -32,4 +32,5 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/forms")],
+  darkMode: "class",
 };

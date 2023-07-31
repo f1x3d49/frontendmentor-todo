@@ -1,54 +1,89 @@
 import React, { Fragment } from "react";
-import { ReactComponent as Check } from "../images/icon-check.svg";
+import { ReactComponent as Cross } from "../images/icon-cross.svg";
 import { Tab } from "@headlessui/react";
 
-const TaskList = () => {
+const TaskList = ({ darkTheme, setDarkTheme }) => {
   return (
-    <div className="w-full h-auto bg-vlgray flex flex-col items-center justify-center shadow-xl">
+    <div className="w-full h-auto  flex flex-col items-center justify-center shadow-xl gap-48">
       <Tab.Group
         as="div"
-        className="flex flex-col justify-center items-center w-full"
+        className="flex flex-col justify-center items-center w-full bg-vlgray"
       >
         <Tab.Panels className="w-full">
           <Tab.Panel>
             <ul className="flex flex-col items-center justify-center w-full h-auto">
-              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center gap-4">
-                <div className="active:bg-gradient-to-r from-gradient1 to-graident2 rounded-full ring-[1px]">
-                  <button className="flex items-center justify-center rounded-full w-5 h-5">
-                    <Check />
-                  </button>
+              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 rounded-full border-vlgblue hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+                  />
+                  <p>Complete online Javascript Course</p>
                 </div>
-                <p>Complete online Javascript Course</p>
-              </li>
-              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center gap-4">
-                <button className="flex items-center justify-center rounded-full border-[1px] border-vlgblue w-5 h-5">
-                  <Check />
+                <button className="cross">
+                  <Cross />
                 </button>
-                <p>Jog around the park 3x</p>
               </li>
-              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center gap-4">
-                <button className="flex items-center justify-center rounded-full border-[1px] border-vlgblue w-5 h-5">
-                  <Check />
+              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 rounded-full border-vlgblue hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+                  />
+                  <p>Jog around the park 3x</p>
+                </div>
+                <button className="cross">
+                  <Cross />
                 </button>
-                <p>10 minutes meditation</p>
               </li>
-              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center gap-4">
-                <button className="flex items-center justify-center rounded-full border-[1px] border-vlgblue w-5 h-5">
-                  <Check />
+              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 rounded-full border-vlgblue hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+                  />
+                  <p>10 minutes meditation</p>
+                </div>
+                <button className="cross">
+                  <Cross />
                 </button>
-                <p>Read for 1 hour</p>
               </li>
-              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center gap-4">
-                <button className="flex items-center justify-center rounded-full border-[1px] border-vlgblue w-5 h-5">
-                  <Check />
+
+              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 rounded-full border-vlgblue hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+                  />
+                  <p>Read for 1 hour</p>
+                </div>
+                <button className="cross">
+                  <Cross />
                 </button>
-                <p>Pick up grocceries</p>
               </li>
-              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center gap-4">
-                <button className="flex items-center justify-center rounded-full border-[1px] border-vlgblue w-5 h-5">
-                  <Check />
+              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 rounded-full border-vlgblue hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+                  />
+                  <p>Pick up grocceries</p>
+                </div>
+                <button className="cross">
+                  <Cross />
                 </button>
-                <p>Complete tod ap on fronted</p>
+              </li>
+              <li className="border-b-2 border-vlgblue p-4 w-full flex items-center justify-between gap-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    className="w-5 h-5 rounded-full border-vlgblue hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+                  />
+                  <p>Complete tod ap on fronted</p>
+                </div>
+                <button className="cross">
+                  <Cross />
+                </button>
               </li>
             </ul>
           </Tab.Panel>
@@ -57,7 +92,7 @@ const TaskList = () => {
         </Tab.Panels>
         <div className="flex items-center justify-between w-full p-4 text-sm">
           <p className="text-dgblue">5 items left</p>
-          <Tab.List className="flex items-center justify-center gap-2 font-[700]">
+          <Tab.List className="items-center justify-center text-center gap-2 font-[700] mobile:hidden desktop:flex">
             <Tab as={Fragment}>
               {({ selected }) => (
                 <button
