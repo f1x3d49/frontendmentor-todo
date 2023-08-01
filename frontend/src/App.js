@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormInput from "./components/FormInput";
 import TaskList from "./components/TaskList";
 
@@ -8,6 +8,23 @@ import { ReactComponent as Sun } from "./images/icon-sun.svg";
 
 function App() {
   const [darkTheme, setDarkTheme] = useState(false);
+  const element = document.documentElement;
+
+  useEffect(() => {
+    switch (darkTheme) {
+      case true:
+        element.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+        break;
+      case false:
+        element.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+        break;
+      default:
+        localStorage.removeItem("theme");
+        break;
+    }
+  }, [element, darkTheme]);
 
   return (
     <div className="relative w-full min-h-screen flex flex-col font-primary">
@@ -22,10 +39,12 @@ function App() {
         </div>
         <FormInput />
         <TaskList darkTheme={darkTheme} setDarkTheme={setDarkTheme} />
-        <h1 className="text-base text-dgblue">Drag and drop to reorder list</h1>
+        <h1 className="text-sm text-dgblue dark:text-darkgblue">
+          Drag and drop to reorder list
+        </h1>
       </div>
-      <div className="w-full mobile:h-[200px] desktop:h-[300px] bg-no-repeat bg-cover mobile:bg-mobileLight desktop:bg-desktopLight  "></div>
-      <div className="flex flex-grow bg-vlgray"></div>
+      <div className="w-full mobile:h-[200px] desktop:h-[300px] bg-no-repeat bg-cover mobile:bg-mobileLight mobile:dark:bg-mobileDark desktop:bg-desktopLight desktop:dark:bg-desktopDark"></div>
+      <div className="flex flex-grow bg-vlgray dark:bg-vdblue"></div>
     </div>
   );
 }

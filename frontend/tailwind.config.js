@@ -12,6 +12,12 @@ module.exports = {
         lgblue: "hsl(233, 11%, 84%)",
         dgblue: "hsl(236, 9%, 61%)",
         vdgblue: "hsl(235, 19%, 35%)",
+        // Dark Theme
+        vdblue: "hsl(235, 21%, 11%)",
+        vddblue: "hsl(235, 24%, 19%)",
+        lightgblue: "hsl(234, 39%, 85%)",
+        darkgblue: "hsl(234, 11%, 52%)",
+        verydgblue: "hsl(237, 14%, 26%)",
       },
       fontFamily: {
         primary: ["Josefin Sans", "sans-serif"],
