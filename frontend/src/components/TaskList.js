@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import { ReactComponent as Cross } from "../images/icon-cross.svg";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Tab } from "@headlessui/react";
+import { eliminate } from "../redux/allSlice";
 
 const TaskList = () => {
-  const all = useSelector((state) => state.all);
+  const tasks = useSelector((state) => state.all);
+  const dispatch = useDispatch();
 
   return (
     <div className="w-full h-auto  flex flex-col items-center justify-center shadow-xl">
@@ -15,83 +17,28 @@ const TaskList = () => {
         <Tab.Panels className="w-full">
           <Tab.Panel>
             <ul className="flex flex-col items-center justify-center w-full h-auto">
-              <li className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
-                  />
-                  <p className="dark:text-lightgblue">
-                    Complete online Javascript Course
-                  </p>
-                </div>
-                <button className="cross">
-                  <Cross />
-                </button>
-              </li>
-              <li className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
-                  />
-                  <p className="dark:text-lightgblue">Jog around the park 3x</p>
-                </div>
-                <button className="cross">
-                  <Cross />
-                </button>
-              </li>
-              <li className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
-                  />
-                  <p className="dark:text-lightgblue">10 minutes meditation</p>
-                </div>
-                <button className="cross">
-                  <Cross />
-                </button>
-              </li>
-
-              <li className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
-                  />
-                  <p className="dark:text-lightgblue">Read for 1 hour</p>
-                </div>
-                <button className="cross">
-                  <Cross />
-                </button>
-              </li>
-              <li className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
-                  />
-                  <p className="dark:text-lightgblue">Pick up grocceries</p>
-                </div>
-                <button className="cross">
-                  <Cross />
-                </button>
-              </li>
-              <li className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
-                  />
-                  <p className="dark:text-lightgblue">
-                    Complete tod ap on fronted
-                  </p>
-                </div>
-                <button className="cross">
-                  <Cross />
-                </button>
-              </li>
+              {tasks.map((task) => {
+                return (
+                  <li
+                    key={task.id}
+                    className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4"
+                  >
+                    <div className="flex items-center gap-4">
+                      <input
+                        type="checkbox"
+                        className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+                      />
+                      <p className="dark:text-lightgblue">{task.content}</p>
+                    </div>
+                    <button
+                      className="cross"
+                      onClick={() => dispatch(eliminate(task.id))}
+                    >
+                      <Cross />
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </Tab.Panel>
           <Tab.Panel>Content 2</Tab.Panel>
