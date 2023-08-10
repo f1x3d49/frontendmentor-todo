@@ -1,8 +1,11 @@
 import React, { Fragment } from "react";
 import { ReactComponent as Cross } from "../images/icon-cross.svg";
+import { useSelector } from "react-redux";
 import { Tab } from "@headlessui/react";
 
-const TaskList = ({ darkTheme, setDarkTheme }) => {
+const TaskList = () => {
+  const all = useSelector((state) => state.all);
+
   return (
     <div className="w-full h-auto  flex flex-col items-center justify-center shadow-xl">
       <Tab.Group
