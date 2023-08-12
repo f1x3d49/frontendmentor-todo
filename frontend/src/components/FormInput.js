@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTask } from "../redux/allSlice";
 
 const FormInput = () => {
+  // Redux dispatch
+  const dispatch = useDispatch();
+
+  // Form Input State
+  const [content, setContent] = useState("");
+  const [checked, isChecked] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(addTask({ task: content }));
+    setContent("");
+  };
+
   return (
-    <form className="flex items-center justify-start w-full bg-vlgray dark:bg-vddblue shadow-xl gap-4 pl-4 rounded-sm">
+    <form
+      className="flex items-center justify-start w-full bg-vlgray dark:bg-vddblue shadow-xl gap-4 pl-4 rounded-sm"
+      onSubmit={handleSubmit}
+    >
       <div>
         <input
           type="checkbox"
@@ -12,6 +30,8 @@ const FormInput = () => {
       <label htmlFor="todo">
         <input
           type="text"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           placeholder="Create a new todo..."
           className="bg-vlgray dark:bg-vddblue focus:ring-0 border-0 text-vdgblue dark:text-darkgblue py-4"
         />

@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { ReactComponent as Cross } from "../images/icon-cross.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { Tab } from "@headlessui/react";
-import { eliminate } from "../redux/allSlice";
+import { eliminateTask } from "../redux/allSlice";
 
 const TaskList = () => {
   const tasks = useSelector((state) => state.all);
@@ -32,7 +32,7 @@ const TaskList = () => {
                     </div>
                     <button
                       className="cross"
-                      onClick={() => dispatch(eliminate(task.id))}
+                      onClick={() => dispatch(eliminateTask({ id: task.id }))}
                     >
                       <Cross />
                     </button>
