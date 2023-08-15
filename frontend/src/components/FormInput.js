@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTask } from "../redux/allSlice";
+import { addTask } from "../redux/tasksSlice";
 
 const FormInput = () => {
   // Redux dispatch
@@ -12,7 +12,12 @@ const FormInput = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(addTask({ task: content }));
+    if (content.trim().length === 0) {
+      alert("Enter a task before adding !!");
+      setContent("");
+      return;
+    }
+    dispatch(addTask({ title: content }));
     setContent("");
   };
 
