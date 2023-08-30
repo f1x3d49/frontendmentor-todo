@@ -33,8 +33,8 @@ export const tasksSlice = createSlice({
     },
 
     toggleTask: (state, action) => {
-      state.completed = state.all.filter(
-        (todo) => todo.id === action.payload.id
+      state.completed.push(
+        state.all.filter((todo) => todo.id === action.payload.id)
       );
       state.active = state.active.filter(
         (todo) => todo.id !== action.payload.id
