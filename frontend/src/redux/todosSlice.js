@@ -70,7 +70,7 @@ export const selectFilteredTodos = createSelector(
   }
 );
 
-export const selectFilteredTodoText = createSelector(
+export const selectFilteredTodoId = createSelector(
   selectFilteredTodos,
-  (filteredTodos) => filteredTodos.map((todo) => todo.text)
+  (filteredTodos) => filteredTodos.map((todo) => todo.id)
 );

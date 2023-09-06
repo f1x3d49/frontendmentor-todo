@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+
+// Redux Tools
 import { useDispatch } from "react-redux";
-import { addTask } from "../redux/tasksSlice";
+import { addTodo } from "../redux/todosSlice";
 
 const FormInput = () => {
   // Redux dispatch
@@ -8,7 +10,7 @@ const FormInput = () => {
 
   // Form Input State
   const [content, setContent] = useState("");
-  const [checked, isChecked] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,8 +19,9 @@ const FormInput = () => {
       setContent("");
       return;
     }
-    dispatch(addTask({ title: content }));
+    dispatch(addTodo(content, checked));
     setContent("");
+    setChecked(false);
   };
 
   return (
@@ -30,6 +33,7 @@ const FormInput = () => {
         <input
           type="checkbox"
           className="w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2 text-gradient2 focus:ring-0 hover:cursor-pointer"
+          onClick={() => setChecked(!checked)}
         />
       </div>
       <label htmlFor="todo">

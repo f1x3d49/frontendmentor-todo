@@ -3,12 +3,16 @@ import { ReactComponent as Cross } from "../images/icon-cross.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { Tab } from "@headlessui/react";
 import { eliminateTask, toggleTask } from "../redux/tasksSlice";
+import ListItem from "./ListItem";
+
+import { selectFilteredTodoId } from "../redux/todosSlice";
 
 const TaskList = () => {
   // Redux Logic
   const all = useSelector((state) => state.tasks.all);
   const completed = useSelector((state) => state.tasks.completed);
   const active = useSelector((state) => state.tasks.active);
+  const todos = useSelector((state) => state.todos);
   const dispatch = useDispatch();
 
   // Checked State
@@ -23,31 +27,17 @@ const TaskList = () => {
         <Tab.Panels className="w-full">
           <Tab.Panel>
             <ul className="flex flex-col items-center justify-center w-full h-auto">
-              {all.map((task) => {
+              {todos.map((todo) => {
                 return (
                   <li
-                    key={task.id}
+                    key={todo.id}
                     className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4"
                   >
-                    <div className="flex items-center gap-4">
-                      <input
-                        type="checkbox"
-                        onClick={() => {
-                          dispatch(toggleTask({ id: task.id }));
-                          setChecked(true);
-                        }}
-                        className={`w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2  focus:ring-0 hover:cursor-pointer ${
-                          isChecked ? "text-gradient2" : ""
-                        }`}
-                      />
-                      <p className="dark:text-lightgblue">{task.title}</p>
-                    </div>
-                    <button
-                      className="cross"
-                      onClick={() => dispatch(eliminateTask({ id: task.id }))}
-                    >
-                      <Cross />
-                    </button>
+                    <ListItem
+                      text={todo.text}
+                      id={todo.id}
+                      isChecked={todo.checked}
+                    />
                   </li>
                 );
               })}

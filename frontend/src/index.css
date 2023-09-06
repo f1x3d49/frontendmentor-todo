@@ -3,15 +3,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-.cross {
-  display: none;
-}
-
-li:hover {
-  cursor: default;
-}
-
-li:hover > .cross {
-  display: block;
-}

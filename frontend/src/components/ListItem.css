@@ -1,0 +1,11 @@
+.cross {
+  display: none;
+}
+
+div:hover {
+  cursor: default;
+}
+
+div:hover > .cross {
+  display: block;
+}
