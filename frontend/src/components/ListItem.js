@@ -9,7 +9,7 @@ import { ReactComponent as Cross } from "../images/icon-cross.svg";
 import { useDispatch } from "react-redux";
 import { removeTodo, toggleTodo } from "../redux/todosSlice";
 
-const ListItem = ({ text, id, isChecked }) => {
+const ListItem = ({ text, id, isChecked, index }) => {
   // React State Logic
   const [checked, setChecked] = useState(false);
 
@@ -17,7 +17,7 @@ const ListItem = ({ text, id, isChecked }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isChecked !== checked) setChecked(isChecked);
+    if (isChecked) setChecked(true);
   }, [checked, setChecked, isChecked]);
 
   return (
@@ -31,7 +31,7 @@ const ListItem = ({ text, id, isChecked }) => {
             dispatch(toggleTodo(id));
           }}
           className={`w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2  focus:ring-0 hover:cursor-pointer ${
-            checked ? "text-gradient2" : ""
+            checked ? "" : "text-gradient2"
           }`}
         />
         <p className="dark:text-lightgblue">{text}</p>
@@ -39,7 +39,7 @@ const ListItem = ({ text, id, isChecked }) => {
       <button
         className="cross"
         onClick={() => {
-          dispatch(removeTodo(id));
+          dispatch(removeTodo(index));
           console.log(id);
         }}
       >

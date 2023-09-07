@@ -15,11 +15,12 @@ const todosSlice = createSlice({
       },
     },
     removeTodo: (state, action) => {
-      state = state.filter((todo) => todo.id !== action.payload);
+      const todoIndex = action.payload;
+      state.splice(todoIndex, 1);
     },
     toggleTodo: (state, action) => {
       const todoId = action.payload;
-      const todo = state[todoId];
+      const todo = state.filter((todo) => todo.id === todoId);
       todo.completed = !todo.completed;
     },
     allTodosCompleted: (state, action) => {
@@ -29,10 +30,11 @@ const todosSlice = createSlice({
       });
     },
     completedTodoCleared: (state, action) => {
+      const todoIndex = action.payload;
       // eslint-disable-next-line array-callback-return
       state.map((todo) => {
         if (todo.completed) {
-          delete state[todo.id];
+          state.splice(todoIndex, 1);
         }
       });
     },
@@ -70,7 +72,7 @@ export const selectFilteredTodos = createSelector(
   }
 );
 
-export const selectFilteredTodoId = createSelector(
+export const selectFilteredTodo = createSelector(
   selectFilteredTodos,
-  (filteredTodos) => filteredTodos.map((todo) => todo.id)
+  (filteredTodos) => filteredTodos.map((todo) => todo)
 );
