@@ -17,7 +17,7 @@ const ListItem = ({ text, id, isChecked, index }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isChecked) setChecked(true);
+    if (isChecked === true) setChecked(true);
   }, [checked, setChecked, isChecked]);
 
   return (
@@ -28,7 +28,7 @@ const ListItem = ({ text, id, isChecked, index }) => {
           type="checkbox"
           onClick={() => {
             setChecked(!checked);
-            dispatch(toggleTodo(id));
+            dispatch(toggleTodo(index));
           }}
           className={`w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2  focus:ring-0 hover:cursor-pointer ${
             checked ? "" : "text-gradient2"

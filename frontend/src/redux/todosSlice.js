@@ -19,9 +19,9 @@ const todosSlice = createSlice({
       state.splice(todoIndex, 1);
     },
     toggleTodo: (state, action) => {
-      const todoId = action.payload;
-      const todo = state.filter((todo) => todo.id === todoId);
-      todo.completed = !todo.completed;
+      const todoIndex = action.payload;
+      const todo = state.filter((item) => state.indexOf(item) === todoIndex);
+      todo[0].completed = !todo[0].completed;
     },
     allTodosCompleted: (state, action) => {
       // eslint-disable-next-line array-callback-return
@@ -52,27 +52,23 @@ export const {
 export default todosSlice.reducer;
 
 const Todos = (state) => state.todos;
+const Filters = (state) => state.filters;
 
 export const selectFilteredTodos = createSelector(
   Todos,
-  (state) => state.filters,
+  Filters,
   (todos, filters) => {
     const { status } = filters;
-    const showAllCompletions = status === StatusFilters.All;
-    if (showAllCompletions) {
+    if (status === StatusFilters.All) {
       return todos;
+    } else if (status === StatusFilters.Completed) {
+      return todos.filter((todo) => todo.completed === true);
+    } else if (status === StatusFilters.Active) {
+      return todos.filter((todo) => todo.completed === false);
     }
-
-    const completedStatus = status === StatusFilters.Completed;
-    return todos.filter((todo) => {
-      const statsuMatches =
-        showAllCompletions || todo.completed === completedStatus;
-      return statsuMatches;
-    });
   }
 );
 
-export const selectFilteredTodo = createSelector(
-  selectFilteredTodos,
-  (filteredTodos) => filteredTodos.map((todo) => todo)
-);
+export const selectRemainingTodos = createSelector(Todos, (todos) => {
+  return todos.filter((todo) => todo.completed === false);
+});

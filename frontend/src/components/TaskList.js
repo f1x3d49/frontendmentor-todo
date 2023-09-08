@@ -2,7 +2,11 @@ import React, { Fragment } from "react";
 
 // Redux Tools
 import { useSelector, useDispatch } from "react-redux";
-import { selectFilteredTodos, completedTodoCleared } from "../redux/todosSlice";
+import {
+  completedTodoCleared,
+  selectFilteredTodos,
+  selectRemainingTodos,
+} from "../redux/todosSlice";
 import { StatusFilters, statusFilterChanged } from "../redux/filtersSlice";
 
 // HeadlessUI Component
@@ -14,6 +18,7 @@ import ListItem from "./ListItem";
 const TaskList = () => {
   // Redux Logic
   const todos = useSelector(selectFilteredTodos);
+  const remainigTodos = useSelector(selectRemainingTodos);
   const dispatch = useDispatch();
 
   return (
@@ -83,7 +88,7 @@ const TaskList = () => {
         </Tab.Panels>
         <div className="flex items-center justify-between w-full p-4 text-sm">
           <p className="text-dgblue dark:text-darkgblue">
-            {todos.length} items left
+            {remainigTodos.length} items left
           </p>
           <Tab.List className="items-center justify-center text-center gap-2 font-[700] mobile:hidden desktop:flex">
             <Tab as={Fragment}>
@@ -94,6 +99,9 @@ const TaskList = () => {
                       ? "text-brightblue"
                       : "text-dgblue dark:text-darkgblue"
                   }`}
+                  onClick={() =>
+                    dispatch(statusFilterChanged(StatusFilters.All))
+                  }
                 >
                   All
                 </button>
@@ -107,6 +115,9 @@ const TaskList = () => {
                       ? "text-brightblue"
                       : "text-dgblue dark:text-darkgblue"
                   }`}
+                  onClick={() =>
+                    dispatch(statusFilterChanged(StatusFilters.Active))
+                  }
                 >
                   Active
                 </button>
@@ -120,6 +131,9 @@ const TaskList = () => {
                       ? "text-brightblue"
                       : "text-dgblue dark:text-darkgblue"
                   }`}
+                  onClick={() =>
+                    dispatch(statusFilterChanged(StatusFilters.Completed))
+                  }
                 >
                   Completed
                 </button>
