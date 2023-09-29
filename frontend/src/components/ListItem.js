@@ -5,31 +5,39 @@ import "./ListItem.css";
 // Cross SVG
 import { ReactComponent as Cross } from "../images/icon-cross.svg";
 
+// Check IMG
+import check from "../images/icon-check.svg";
+
 // Redux Tools
 import { useDispatch } from "react-redux";
 import { removeTodo, toggleTodo } from "../redux/todosSlice";
 
 const ListItem = ({ text, id, isChecked, index }) => {
-  // React State Logic
-  const [checked, setChecked] = useState(false);
-
   // Redux Dispatch
   const dispatch = useDispatch();
 
   return (
     <div className="flex items-center justify-between gap-4 w-full">
       <div className="flex gap-4">
-        <input
-          type="checkbox"
-          defaultChecked={isChecked}
+        <button
+          type="button"
+          aria-label="complete"
           onClick={() => {
-            setChecked(!checked);
             dispatch(toggleTodo(index));
           }}
-          className={`w-5 h-5 rounded-full border-vlgblue dark:border-darkgblue bg-transparent hover:border-gradient2  focus:ring-0 hover:cursor-pointer ${
-            checked ? "" : "text-gradient2"
+          className={`flex items-center justify-center w-5 h-5 aspect-square rounded-full border-vlgblue border-[1px] dark:border-darkgblue  hover:border-gradient2 hover:cursor-pointer ${
+            isChecked ? "bg-gradient2" : ""
           }`}
-        />
+        >
+          {isChecked && (
+            <img
+              src={check}
+              alt="check"
+              aria-hidden
+              className="h-2 text-black z-10"
+            />
+          )}
+        </button>
         <p className="dark:text-lightgblue">{text}</p>
       </div>
       <button
