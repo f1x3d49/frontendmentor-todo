@@ -16,16 +16,12 @@ const ListItem = ({ text, id, isChecked, index }) => {
   // Redux Dispatch
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isChecked === true) setChecked(true);
-  }, [checked, setChecked, isChecked]);
-
   return (
     <div className="flex items-center justify-between gap-4 w-full">
       <div className="flex gap-4">
-        {" "}
         <input
           type="checkbox"
+          defaultChecked={isChecked}
           onClick={() => {
             setChecked(!checked);
             dispatch(toggleTodo(index));
