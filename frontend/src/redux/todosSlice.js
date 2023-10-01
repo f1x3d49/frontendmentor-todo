@@ -38,6 +38,9 @@ const todosSlice = createSlice({
         }
       });
     },
+    reorderTodos: (state, action) => {
+      return action.payload;
+    },
   },
 });
 
@@ -47,6 +50,7 @@ export const {
   toggleTodo,
   allTodosCompleted,
   completedTodoCleared,
+  reorderTodos,
 } = todosSlice.actions;
 
 export default todosSlice.reducer;

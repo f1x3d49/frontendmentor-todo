@@ -1,11 +1,15 @@
 import React, { Fragment } from "react";
 
+// Framer Motion Tools
+import { Reorder } from "framer-motion";
+
 // Redux Tools
 import { useSelector, useDispatch } from "react-redux";
 import {
   completedTodoCleared,
   selectFilteredTodos,
   selectRemainingTodos,
+  reorderTodos,
 } from "../redux/todosSlice";
 import { StatusFilters, statusFilterChanged } from "../redux/filtersSlice";
 
@@ -21,6 +25,11 @@ const TaskList = () => {
   const remainigTodos = useSelector(selectRemainingTodos);
   const dispatch = useDispatch();
 
+  // Reorder Handle
+  const handleReorder = (e) => {
+    dispatch(reorderTodos(e));
+  };
+
   return (
     <div className="w-full h-auto  flex flex-col items-center justify-center shadow-xl">
       <Tab.Group
@@ -29,11 +38,17 @@ const TaskList = () => {
       >
         <Tab.Panels className="w-full">
           <Tab.Panel>
-            <ul className="flex flex-col items-center justify-center w-full h-auto">
+            <Reorder.Group
+              axis="y"
+              onReorder={handleReorder}
+              values={todos}
+              className="flex flex-col items-center justify-center w-full h-auto"
+            >
               {todos.map((todo, index) => {
                 return (
-                  <li
+                  <Reorder.Item
                     key={todo.id}
+                    value={todo}
                     className="border-b-2 border-vlgblue dark:border-darkgblue p-4 w-full flex items-center justify-between gap-4"
                   >
                     <ListItem
@@ -42,10 +57,10 @@ const TaskList = () => {
                       isChecked={todo.completed}
                       index={index}
                     />
-                  </li>
+                  </Reorder.Item>
                 );
               })}
-            </ul>
+            </Reorder.Group>
           </Tab.Panel>
           <Tab.Panel>
             <ul className="flex flex-col items-center justify-center w-full h-auto">

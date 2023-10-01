@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "./ListItem.css";
 
@@ -38,7 +38,11 @@ const ListItem = ({ text, id, isChecked, index }) => {
             />
           )}
         </button>
-        <p className="dark:text-lightgblue">{text}</p>
+        <p
+          className={`dark:text-lightgblue ${isChecked ? "line-through" : ""}`}
+        >
+          {text}
+        </p>
       </div>
       <button
         className="cross"
