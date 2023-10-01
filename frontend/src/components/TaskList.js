@@ -58,7 +58,7 @@ const TaskList = () => {
                     <ListItem
                       text={todo.text}
                       id={todo.id}
-                      isChecked={todo.checked}
+                      isChecked={todo.completed}
                       index={index}
                     />
                   </li>
@@ -77,7 +77,7 @@ const TaskList = () => {
                     <ListItem
                       text={todo.text}
                       id={todo.id}
-                      isChecked={todo.checked}
+                      isChecked={todo.completed}
                       index={index}
                     />
                   </li>
