@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
 // Framer Motion Tools
-import { Reorder } from "framer-motion";
+import { Reorder, motion } from "framer-motion";
 
 // Redux Tools
 import { useSelector, useDispatch } from "react-redux";
@@ -30,8 +30,23 @@ const TaskList = () => {
     dispatch(reorderTodos(e));
   };
 
+  // Framer Variants
+  const container = {
+    hidden: { opacity: 0, y: 500 },
+    show: {
+      opacity: 1,
+      y: 0,
+    },
+  };
+
   return (
-    <div className="w-full h-auto  flex flex-col items-center justify-center shadow-xl">
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      transition={{ type: "spring", duration: 1.5 }}
+      className="w-full h-auto  flex flex-col items-center justify-center shadow-xl"
+    >
       <Tab.Group
         as="div"
         className="flex flex-col justify-center items-center w-full bg-vlgray dark:bg-vddblue rounded-sm"
@@ -163,7 +178,7 @@ const TaskList = () => {
           </button>
         </div>
       </Tab.Group>
-    </div>
+    </motion.div>
   );
 };
 

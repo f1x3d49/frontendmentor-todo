@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../redux/todosSlice";
 
+// Framer Motion
+import { motion } from "framer-motion";
+
 const FormInput = () => {
   // Redux dispatch
   const dispatch = useDispatch();
@@ -24,8 +27,18 @@ const FormInput = () => {
     setChecked(false);
   };
 
+  // form container variant
+  const formvar = {
+    hidden: { opacity: 0, x: -500 },
+    show: { opacity: 1, x: 0 },
+  };
+
   return (
-    <form
+    <motion.form
+      variants={formvar}
+      initial="hidden"
+      animate="show"
+      transition={{ type: "tween", duration: 0.75 }}
       className="flex items-center justify-start w-full bg-vlgray dark:bg-vddblue shadow-xl gap-4 pl-4 rounded-sm"
       onSubmit={handleSubmit}
     >
@@ -45,7 +58,7 @@ const FormInput = () => {
           className="bg-vlgray dark:bg-vddblue focus:ring-0 border-0 text-vdgblue dark:text-darkgblue py-4"
         />
       </label>
-    </form>
+    </motion.form>
   );
 };
 
